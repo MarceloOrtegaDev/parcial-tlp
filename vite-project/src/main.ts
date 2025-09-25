@@ -96,3 +96,45 @@ const server = factory.crearEquipo("Servidor", "Dell PowerEdge", "32GB", "Xeon")
 console.log(server.detalles());
 
 
+interface miEquipo {
+  nombre:string
+  tipo: string
+  estado:string
+}
+
+class inventarioViejo {
+  public equipos:miEquipo[] = [];
+  constructor(){
+
+  }
+  agregarEquipo(nombre:string, tipo:string, estado:string ) {
+    this.equipos.push({ nombre, tipo, estado });
+    return {nombre, tipo, estado};
+}
+
+  listarEquipos():void {
+    console.log(this.equipos);
+  }
+}
+
+class adaptadorInventario {
+  private inventario: inventarioViejo;
+  constructor(inventario: inventarioViejo) {
+    this.inventario = inventario;
+  }
+
+  agregarEquipo(nombre:string, tipo:string, estado:string ) {
+    return this.inventario.agregarEquipo(nombre, tipo, estado);
+  }
+
+  listarEquipos(): void {
+    this.inventario.listarEquipos();
+  }
+}
+
+const inventario = new inventarioViejo();
+const adaptador = new adaptadorInventario(inventario);
+
+adaptador.agregarEquipo("Router Cisco", "Red", "disponible");
+adaptador.listarEquipos()
+
