@@ -107,7 +107,7 @@ class inventarioViejo {
   constructor(){
 
   }
-  agregarEquipo(nombre:string, tipo:string, estado:string ) {
+  addItem(nombre:string, tipo:string, estado:string ) {
     this.equipos.push({ nombre, tipo, estado });
     return {nombre, tipo, estado};
 }
@@ -124,7 +124,7 @@ class adaptadorInventario {
   }
 
   agregarEquipo(nombre:string, tipo:string, estado:string ) {
-    return this.inventario.agregarEquipo(nombre, tipo, estado);
+    return this.inventario.addItem(nombre, tipo, estado);
   }
 
   listarEquipos(): void {
@@ -137,4 +137,6 @@ const adaptador = new adaptadorInventario(inventario);
 
 adaptador.agregarEquipo("Router Cisco", "Red", "disponible");
 adaptador.listarEquipos()
+
+
 
